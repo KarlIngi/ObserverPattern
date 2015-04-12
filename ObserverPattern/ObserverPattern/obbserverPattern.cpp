@@ -4,7 +4,7 @@
 using namespace std;
 #define QUEUE_SIZE  8
 
-typedef struct { int a, b, c; } sValues;
+typedef struct { int a, b, c; } sValues;	
 
 /***********************************************************
 *			OBSERVER
@@ -12,18 +12,15 @@ typedef struct { int a, b, c; } sValues;
 class Observer
 {
 public:
-	virtual void update() = 0;
-	virtual void update_values() = 0;
+	virtual void update() {};
+	virtual void update_values() {};
 };
-
 /***********************************************************
-*			Subject
+*			SUBJECT
 ************************************************************/
 class Subject
 {
-	int value_;
-	int end = -1;
-	sValues s_values = {};
+private:
 	Observer* obs_[QUEUE_SIZE] = {};
 	vector <  Observer * > vector_obs_;
 public:
@@ -54,22 +51,6 @@ public:
 		//for Vector
 		vector_obs_.erase(remove(vector_obs_.begin(), vector_obs_.end(), obs), vector_obs_.end());
 	}
-	void set_val(int value){
-		value_ = value;
-		notify();
-	}
-	void set_values(int a, int b, int c){
-		s_values.a = a;
-		s_values.b = b;
-		s_values.c = c;
-		notify();
-	}
-	sValues get_values(void){
-		return s_values;
-	}
-	int get_val(void){
-		return value_;
-	}
 	void notify(){
 		for (int i = 0; i <= QUEUE_SIZE - 1; ++i){
 			if (obs_[i] != 0){
@@ -85,22 +66,55 @@ public:
 };
 
 /***********************************************************
-*			plusOBSERVER
+*			ValueSubject
 ************************************************************/
-class PlusObserver : public Observer
+class ValueSubject : public Subject
+{
+	int value_;
+public:
+	void set_val(int value){
+		value_ = value;
+		notify();
+	}
+	int get_val(void){
+		return value_;
+	}
+};
+/***********************************************************
+*			MultipleValueSubject
+************************************************************/
+class MultipleValueSubject : public Subject
+{
+	sValues s_values = {};
+public:
+	void set_values(int a, int b, int c){
+		s_values.a = a;
+		s_values.b = b;
+		s_values.c = c;
+		notify();
+	}
+	sValues get_values(void){
+		return s_values;
+	}
+};
+
+/***********************************************************
+*			ValueOBSERVER
+************************************************************/
+class ValueObserver : public Observer
 {
 	int i = 0, v = 0;
 	sValues values;
-	Subject *model_;
+	ValueSubject *model_;
 public:
-	PlusObserver(int div){
+	ValueObserver(int div){
 		i = div;
 	}
-	void attatch(Subject *model){
+	void attatch(ValueSubject *model){
 		model->attach(this);
 		model_ = model;
 	}
-	void detatch(Subject *model){
+	void detatch(ValueSubject *model){
 		model->detach(this);
 		//model_ = model;
 	}
@@ -108,35 +122,28 @@ public:
 		v = model_->get_val();
 		cout << v << " plus  " << i << " is " << v + i << '\n';
 	}
-	/* virtual */void update_values(){
-		values = model_->get_values();
-		cout << values.a << " and  " << values.b << " and " << values.c << '\n';
-	}
+	
 };
 
 /***********************************************************
-*			minusOBSERVER
+*			MultipleValueOBSERVER
 ************************************************************/
-class MinusObserver : public Observer
+class MultipleValueObserver : public Observer
 {
 	int i = 0, v = 0;
 	sValues values;
-	Subject *model_;
+	MultipleValueSubject *model_;
 public:
-	MinusObserver(int mod){
+	MultipleValueObserver(int mod){
 		i = mod;
 	}
-	void attatch(Subject *model){
+	void attatch(MultipleValueSubject *model){
 		model->attach(this);
 		model_ = model;
 	}
-	void detatch(Subject *model){
+	void detatch(MultipleValueSubject *model){
 		model->detach(this);
 		//model_ = model;
-	}
-	/* virtual */void update(){
-		v = model_->get_val();
-		cout << v << " minus " << i << " is " << v - i << '\n';
 	}
 	/* virtual */void update_values(){
 		values = model_->get_values();
@@ -149,36 +156,18 @@ public:
 ************************************************************/
 int main()
 {
-	Subject subj;
-	PlusObserver plus1(4);
-	PlusObserver plus2(3);
-	MinusObserver minus3(3);
+	ValueSubject valueSubj;
+	MultipleValueSubject multValueSubj;
+	ValueObserver plus2(3);
+	MultipleValueObserver minus3(3);
 	//plus1.attatch(&subj);
 	//plus2.attatch(&subj);
-	minus3.attatch(&subj);
-	minus3.attatch(&subj);
-	minus3.attatch(&subj);
-	minus3.attatch(&subj);
-	minus3.attatch(&subj);
-	minus3.attatch(&subj);
-	minus3.attatch(&subj);
-	minus3.attatch(&subj);
-	minus3.attatch(&subj);
-	minus3.attatch(&subj);
-
-	subj.set_val(10);
-	minus3.detatch(&subj);
-	minus3.detatch(&subj);
-	minus3.detatch(&subj);
-	minus3.detatch(&subj);
-	minus3.detatch(&subj);
-	minus3.detatch(&subj);
-	minus3.detatch(&subj);
-	minus3.detatch(&subj);
-	minus3.detatch(&subj);
-	minus3.detatch(&subj);
-	minus3.detatch(&subj);
-	subj.set_val(20);
+	minus3.attatch(&multValueSubj);
+	
+	valueSubj.set_val(10);
+	minus3.detatch(&multValueSubj);
+	
+	valueSubj.set_val(20);
 	//subj.set_values(1, 2, 3);
 	//minus3.detatch(&subj);
 	//subj.set_values(4, 5, 6);
