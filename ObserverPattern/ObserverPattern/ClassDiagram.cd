@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Observer">
+    <Position X="1.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQCEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>obbserverPattern.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Subject" Collapsed="true">
+    <Position X="1.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAQAAAAAAAAAAAAACAAAAAQQAAAAA=</HashCode>
+      <FileName>obbserverPattern.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ValueSubject" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAACICAAAAAAAAAAAAA=</HashCode>
+      <FileName>obbserverPattern.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultipleValueSubject" Collapsed="true">
+    <Position X="2.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAACAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>obbserverPattern.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ValueObserver">
+    <Position X="0.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAIBAAAQAMAAA=</HashCode>
+      <FileName>obbserverPattern.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultipleValueObserver">
+    <Position X="2.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAEAAAAAAAAAAAAAAAACAAIBAAAAAIAAA=</HashCode>
+      <FileName>obbserverPattern.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="__unnamed_struct_0001_1" Collapsed="true">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgAQAAAAAAAAA=</HashCode>
+      <FileName>obbserverPattern.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="sValues" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>obbserverPattern.cpp</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

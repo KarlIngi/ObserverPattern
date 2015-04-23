@@ -5,6 +5,7 @@ using namespace std;
 #define QUEUE_SIZE  8
 
 typedef struct { int a, b, c; } sValues;	
+class Subject;
 
 /***********************************************************
 *			OBSERVER
@@ -14,6 +15,7 @@ class Observer
 public:
 	virtual void update() {};
 	virtual void update_values() {};
+	
 };
 /***********************************************************
 *			SUBJECT
@@ -156,18 +158,23 @@ public:
 ************************************************************/
 int main()
 {
-	ValueSubject valueSubj;
-	MultipleValueSubject multValueSubj;
-	ValueObserver plus2(3);
-	MultipleValueObserver minus3(3);
-	//plus1.attatch(&subj);
-	//plus2.attatch(&subj);
-	minus3.attatch(&multValueSubj);
+	//SUBJECTS DEFINED
+	ValueSubject vSubject;
+	MultipleValueSubject mSubject;
+
+	//OBSERVERS DEFINED
+	ValueObserver vObserver(3);
+	MultipleValueObserver mObserver(3);
+
+	vObserver.attatch(&vSubject);
+	mObserver.attatch(&mSubject);
 	
-	valueSubj.set_val(10);
-	minus3.detatch(&multValueSubj);
+	vSubject.set_val(10);
+	mSubject.set_values(1, 2, 3);
+
+	vObserver.detatch(&vSubject);
 	
-	valueSubj.set_val(20);
+	vSubject.set_val(20);
 	//subj.set_values(1, 2, 3);
 	//minus3.detatch(&subj);
 	//subj.set_values(4, 5, 6);
